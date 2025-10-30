@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДОДО ПИЦЦА - Доставка пиццы Павлодар</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <div>
+                    <button style="background: none; border: none; cursor: pointer; color: var(--dodo-gray);">
+                        <i class="fas fa-globe"></i> Язык
+                    </button>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end;">
+                    <a href="#">Прямой эфир</a>
+                    <a href="#">Работа в Додо</a>
+                    <a href="#">Франшиза</a>
+                    <a href="#">О нас</a>
+                    <a href="#">Контакты</a>
+                    <a href="#">Сертификаты</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="main-header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-circle">Д</div>
+                    <div class="logo-text">
+                        <h1>ДОДО ПИЦЦА</h1>
+                        <p>Сеть №1 в Казахстане по количеству пиццерий</p>
+                    </div>
+                </div>
+
+                <div class="location-info">
+                    <p>Доставка пиццы Павлодар</p>
+                    <p>27 мин • ⭐ 4.82</p>
+                </div>
+
+                <div class="user-actions">
+                    <span style="display: none; font-size: 0.875rem;">Додокоины</span>
+                    <span style="display: none; font-size: 0.875rem;">Войти</span>
+                    <button class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-text">Корзина</span>
+                    </button>
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-bars" style="font-size: 1.5rem; color: var(--dodo-gray);"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav id="navMenu">
+            <ul>
+                <li><a href="#pizzas">Пиццы</a></li>
+                <li><a href="#combos">Комбо</a></li>
+                <li><a href="#appetizers">Закуски</a></li>
+                <li><a href="#cocktails">Коктейли</a></li>
+                <li><a href="#coffee">Кофе</a></li>
+                <li><a href="#drinks">Напитки</a></li>
+                <li><a href="#desserts">Десерты</a></li>
+                <li><a href="#sauces">Соусы</a></li>
+                <li><a href="#more">Ещё</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=1200&h=600&fit=crop" alt="Новая пицца">
+                    <div class="carousel-overlay">
+                        <h2>Новая пицца со сливочным сыром</h2>
+                        <p>Попробуйте нашу новинку сегодня</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1200&h=600&fit=crop" alt="Комбо предложения">
+                    <div class="carousel-overlay">
+                        <h2>Комбо предложения</h2>
+                        <p>Экономьте с нашими комбо набором</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1571407-4c1a5d4b6e5e?w=1200&h=600&fit=crop" alt="Пиццы на любой вкус">
+                    <div class="carousel-overlay">
+                        <h2>Пиццы на любой вкус</h2>
+                        <p>Классические и авторские рецепты</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn" aria-label="Предыдущий слайд">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn" id="nextBtn" aria-label="Следующий слайд">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="carousel-dots">
+                    <button class="carousel-dot active" data-index="0" aria-label="Слайд 1"></button>
+                    <button class="carousel-dot" data-index="1" aria-label="Слайд 2"></button>
+                    <button class="carousel-dot" data-index="2" aria-label="Слайд 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Products Section -->
+    <section class="product-section" id="popular">
+        <h2>Часто заказывают</h2>
+        <div class="products-grid" id="popularProducts"></div>
+    </section>
+
+    <!-- Pizzas Section -->
+    <section class="product-section" id="pizzas">
+        <h2>Пиццы</h2>
+        <div class="products-grid" id="pizzasProducts"></div>
+    </section>
+
+    <!-- Combos Section -->
+    <section class="product-section" id="combos">
+        <h2>Комбо</h2>
+        <div class="products-grid" id="combosProducts"></div>
+    </section>
+
+    <!-- Delivery Info Section -->
+    <section class="delivery-info">
+        <div class="delivery-content">
+            <h2>Доставка пиццы в городе Павлодар</h2>
+            <div class="delivery-grid">
+                <div class="delivery-card">
+                    <div class="delivery-card-icon">⏱️</div>
+                    <h3>60 минут или пицца в подарок</h3>
+                    <p>Гарантированная доставка за указанное время</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-card-icon">🎁</div>
+                    <h3>Минимальная сумма заказа</h3>
+                    <p>3 500 ₸ для доставки</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-card-icon">📍</div>
+                    <h3>Зона доставки</h3>
+                    <p>Павлодар и близлежащие районы</p>
+                </div>
+            </div>
+            <div class="delivery-cta">
+                <p>Проверьте доступность доставки по вашему адресу</p>
+                <button>Просмотреть зону доставки</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>О ДОДО ПИЦЦА</h3>
+                    <ul>
+                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Работа в Додо</a></li>
+                        <li><a href="#">Франшиза</a></li>
+                        <li><a href="#">Инвестиции</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>ПАРТНЕРАМ</h3>
+                    <ul>
+                        <li><a href="#">Поставщики</a></li>
+                        <li><a href="#">Корпоративные заказы</a></li>
+                        <li><a href="#">Сертификаты для бизнеса</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>КОНТАКТЫ</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+77772221111">+7 (777) 222-11-11</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@dodopizza.kz">info@dodopizza.kz</a></li>
+                        <li><i class="fas fa-map-pin"></i> Павлодар, Казахстан</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ</h3>
+                    <button style="width: 100%; background: rgba(255, 255, 255, 0.1); border: none; color: white; padding: 0.5rem; border-radius: 0.25rem; margin-bottom: 0.5rem; cursor: pointer; font-weight: 500;">App Store</button>
+                    <button style="width: 100%; background: rgba(255, 255, 255, 0.1); border: none; color: white; padding: 0.5rem; border-radius: 0.25rem; margin-bottom: 1rem; cursor: pointer; font-weight: 500;">Google Play</button>
+                    <h4 style="font-size: 0.875rem; margin-bottom: 0.75rem;">Социальные сети</h4>
+                    <div class="footer-socials">
+                        <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
+                        <button class="social-btn"><i class="fab fa-instagram"></i></button>
+                        <button class="social-btn"><i class="fab fa-youtube"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-delivery">
+                <h3>ЗОНЫ ДОСТАВКИ</h3>
+                <p>Мы доставляем пиццу в Павлодаре и близлежащих районах. Проверьте доступность доставки по вашему адресу.</p>
+                <button>Посмотреть зону доставки</button>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ДОДО ПИЦЦА. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
