@@ -7,8 +7,70 @@
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="product.css">
 </head>
 <body>
+    <!-- Product Modal (shared with product page) -->
+    <div id="productModal" class="modal" style="display:none;">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <!-- Left side - Image -->
+            <div class="modal-image-container">
+                <div class="modal-image">
+                    <img id="modalProductImage" src="" alt="Пицца">
+                </div>
+            </div>
+
+            <!-- Right side - Info -->
+            <div class="modal-info">
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <h2 id="modalProductTitle"></h2>
+                <p id="modalProductDescription"></p>
+
+                <!-- Size Selector -->
+                <div class="selector-group">
+                    <h3>Размер</h3>
+                    <div class="size-options" id="sizeOptions"></div>
+                </div>
+
+                <!-- Crust Selector -->
+                <div class="selector-group">
+                    <h3>Тесто</h3>
+                    <div class="crust-options" id="crustOptions">
+                        <label class="radio-option">
+                            <input type="radio" name="crust" value="traditional" checked>
+                            <span>Традиционное</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="crust" value="thin">
+                            <span>Тонкое</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Add-ons -->
+                <div class="selector-group">
+                    <h3>Добавить по вкусу</h3>
+                    <div class="addons-grid" id="addonsGrid"></div>
+                </div>
+
+                <!-- Price and Add to Cart -->
+                <div class="modal-footer">
+                    <button class="modal-add-to-cart-btn" id="modalAddToCartBtn">
+                        <span>В корзину за <strong id="totalPrice">0</strong> ₸</span>
+                    </button>
+                    <div class="modal-quantity">
+                        <button class="quantity-btn" id="decreaseQty">−</button>
+                        <div class="quantity-display" id="quantityDisplay">1</div>
+                        <button class="quantity-btn" id="increaseQty">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="top-bar">
             <div class="top-bar-content">
@@ -32,9 +94,10 @@
         <div class="main-header">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-circle">Д</div>
+                    <a href="/" class="logo-link">
+                        <img src="Images/Logo.png" alt="ДОДО ПИЦЦА" class="site-logo">
+                    </a>
                     <div class="logo-text">
-                        <h1>ДОДО ПИЦЦА</h1>
                         <p>Сеть №1 в Казахстане по количеству пиццерий</p>
                     </div>
                 </div>
@@ -79,21 +142,21 @@
         <div class="hero-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-slide active">
-                    <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=1200&h=600&fit=crop" alt="Новая пицца">
+                    <img src="https://cdn-imgproxy.mamado.su/ZFRa1BnL0t8p1RhRBfWHRup2TFviWROgTtRt_NOyruk/c:1026:1026:nowe:127:0/q:90/czM6Ly9tYW1hZG8t/YXBpLXByb2R1Y3Rp/b24vc3RvcmFnZS8x/Mjc1MDUwL1hYWEwu/anBlZw.webp" alt="Новая пицца">
                     <div class="carousel-overlay">
                         <h2>Новая пицца со сливочным сыром</h2>
                         <p>Попробуйте нашу новинку сегодня</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1200&h=600&fit=crop" alt="Комбо предложения">
+                    <img src="Images\carousel\kombo_3.jpg" alt="Комбо предложения">
                     <div class="carousel-overlay">
                         <h2>Комбо предложения</h2>
                         <p>Экономьте с нашими комбо набором</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1571407-4c1a5d4b6e5e?w=1200&h=600&fit=crop" alt="Пиццы на любой вкус">
+                    <img src="https://chudobludo.com/989766135-0-105-2000-1230-1920x0-80-0-0-16a8fff0f23e9297155772f93b403aed.jpeg" alt="Пиццы на любой вкус">
                     <div class="carousel-overlay">
                         <h2>Пиццы на любой вкус</h2>
                         <p>Классические и авторские рецепты</p>
@@ -224,7 +287,6 @@
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
