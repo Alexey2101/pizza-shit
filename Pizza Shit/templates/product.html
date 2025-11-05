@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} - ДОДО ПИЦЦА</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/product.css">
+</head>
+<body>
+    <div class="product-page">
+        <div class="product-container">
+            <!-- Left side - Image -->
+            <div class="product-image-container">
+                <img src="static/images/pizza/{{.ID}}.jpg" alt="{{.Title}}" class="product-image">
+            </div>
+
+            <!-- Right side - Info -->
+            <div class="product-info">
+                <h1>{{.Title}}</h1>
+                <p class="description">{{.Description}}</p>
+
+                <!-- Size Selector -->
+                <div class="selector-group">
+                    <h3>Размер</h3>
+                    <div class="size-options">
+                        <button class="size-btn active">25 см</button>
+                        <button class="size-btn">30 см</button>
+                        <button class="size-btn">35 см</button>
+                    </div>
+                </div>
+
+                <!-- Crust Selector -->
+                <div class="selector-group">
+                    <h3>Тесто</h3>
+                    <div class="crust-options">
+                        <label class="radio-option">
+                            <input type="radio" name="crust" value="traditional" checked>
+                            <span>Традиционное</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="crust" value="thin">
+                            <span>Тонкое</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price and Add to Cart -->
+                <div class="product-footer">
+                    <button class="add-to-cart-btn">
+                        <span>В корзину за {{.Price}} ₸</span>
+                    </button>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">−</button>
+                        <span class="quantity">1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Простой обработчик кнопки "В корзину"
+        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            alert('Товар добавлен в корзину!');
+            window.location.href = '/';
+        });
+    </script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
