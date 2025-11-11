@@ -13,19 +13,20 @@ body {
     color: var(--dodo-gray);
     background-color: #fff;
 }
-/* Modal Styles */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
-    display: none; /* hidden by default, shown with .show */
+    z-index: 1100;
+    display: none;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.6);
-    transition: background 250ms ease;
+    background: rgba(0, 0, 0, 0.75);
+    transition: all 250ms ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 /* When used as standalone page (product.html) we disable overlay positioning */
@@ -43,21 +44,23 @@ body {
     right: 0;
     bottom: 0;
     background: transparent;
+    z-index: 1101;
 }
 .modal-content {
     position: relative;
-    z-index: 1001;
+    z-index: 1102;
     background: white;
     border-radius: 1rem;
     max-width: 1000px;
     width: 95%;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     padding: 2rem;
+    transform-origin: center center;
 }
 @media (max-width: 768px) {
     .modal-content {
@@ -68,7 +71,10 @@ body {
 }
 
 /* animation + shown state */
-.modal.show { display: flex; }
+.modal.show { 
+    display: flex;
+    opacity: 1;
+}
 .modal-content {
     transform: translateY(12px) scale(0.995);
     opacity: 0;
@@ -80,7 +86,10 @@ body {
 }
 
 /* Prevent background scroll when modal open */
-body.lock { overflow: hidden; }
+body.lock { 
+    overflow: hidden;
+    padding-right: 15px; /* Компенсация скроллбара */
+}
 
 @media (min-width: 900px) {
     .modal-image img { max-width: 420px; }
@@ -94,7 +103,7 @@ body.lock { overflow: hidden; }
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--dodo-gray);
-    z-index: 1002;
+    z-index: 1103;
     width: 2.5rem;
     height: 2.5rem;
     display: flex;
@@ -310,4 +319,99 @@ body.lock { overflow: hidden; }
 }
 .addons-grid::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 117, 0, 0.8);
+}
+
+/* Auth Modal Styles */
+.auth-modal-content {
+    max-width: 500px;
+    grid-template-columns: 1fr !important;
+    padding: 2rem !important;
+}
+
+.auth-tab {
+    display: none;
+}
+
+.auth-tab.active {
+    display: block;
+}
+
+.auth-tab h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: var(--dodo-gray);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dodo-gray);
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--dodo-light-gray);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--dodo-orange);
+    box-shadow: 0 0 0 3px rgba(255, 117, 0, 0.1);
+}
+
+.auth-submit-btn {
+    width: 100%;
+    background-color: var(--dodo-orange);
+    color: white;
+    padding: 0.875rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 1rem;
+}
+
+.auth-submit-btn:hover {
+    opacity: 0.9;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(77, 77, 77, 0.7);
+}
+
+.auth-switch a {
+    color: var(--dodo-orange);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.auth-error {
+    background: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
 }

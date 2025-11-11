@@ -6,8 +6,8 @@
     <title>ДОДО ПИЦЦА - Доставка пиццы Павлодар</title>
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/product.css">
 </head>
 <body>
     <!-- Product Modal (shared with product page) -->
@@ -71,6 +71,57 @@
             </div>
         </div>
     </div>
+
+    <!-- Auth Modal: Login/Register -->
+    <div id="authModal" class="modal" style="display:none;">
+        <div class="modal-overlay" id="authModalOverlay"></div>
+        <div class="modal-content auth-modal-content">
+            <button class="modal-close" id="authModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Login Tab -->
+            <div id="loginTab" class="auth-tab active">
+                <h2>Вход в аккаунт</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Войти</button>
+                    <p class="auth-switch">Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a></p>
+                </form>
+                <div id="loginError" class="auth-error" style="display:none;"></div>
+            </div>
+
+            <!-- Register Tab -->
+            <div id="registerTab" class="auth-tab" style="display:none;">
+                <h2>Создать аккаунт</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Имя</label>
+                        <input type="text" id="registerName" name="name" required placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Пароль</label>
+                        <input type="password" id="registerPassword" name="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="auth-submit-btn">Зарегистрироваться</button>
+                    <p class="auth-switch">Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a></p>
+                </form>
+                <div id="registerError" class="auth-error" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="top-bar">
             <div class="top-bar-content">
@@ -95,24 +146,34 @@
             <div class="header-content">
                 <div class="logo">
                     <a href="/" class="logo-link">
-                        <img src="Images/Logo.png" alt="ДОДО ПИЦЦА" class="site-logo">
+                        <img src="/static/Images/Logo.png" alt="ДОДО ПИЦЦА" class="site-logo">
                     </a>
                     <div class="logo-text">
                         <p>Сеть №1 в Казахстане по количеству пиццерий</p>
                     </div>
                 </div>
 
-                <div class="location-info">
-                    <p>Доставка пиццы Павлодар</p>
-                    <p>27 мин • ⭐ 4.82</p>
+                <!-- Center block: address / delivery selector -->
+                <div class="header-center">
+                    <button class="location-btn" id="selectLocation">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="location-text">
+                            <div class="location-line">Доставка пиццы</div>
+                            <div class="location-sub">Павлодар • 27 мин</div>
+                        </div>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </button>
                 </div>
 
                 <div class="user-actions">
-                    <span style="display: none; font-size: 0.875rem;">Додокоины</span>
-                    <span style="display: none; font-size: 0.875rem;">Войти</span>
-                    <button class="cart-btn">
+                    <button class="cart-btn" id="cartBtn" aria-label="Открыть корзину">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-text">Корзина</span>
+                        <span class="cart-count" aria-hidden="true">0</span>
+                    </button>
+                    <button class="auth-btn" id="authBtn" aria-label="Войти или зарегистрироваться">
+                        <i class="fas fa-user"></i>
+                        <span class="auth-text">Войти</span>
                     </button>
                     <button class="menu-btn" id="menuBtn">
                         <i class="fas fa-bars" style="font-size: 1.5rem; color: var(--dodo-gray);"></i>
@@ -149,7 +210,7 @@
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="Images\carousel\kombo_3.jpg" alt="Комбо предложения">
+                    <img src="/static/Images/carousel/kombo_3.jpg" alt="Комбо предложения">
                     <div class="carousel-overlay">
                         <h2>Комбо предложения</h2>
                         <p>Экономьте с нашими комбо набором</p>
@@ -287,6 +348,6 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
