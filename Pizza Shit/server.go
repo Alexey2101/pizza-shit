@@ -24,6 +24,7 @@ type User struct {
 	Email    string `json:"email"`
 	Password string `json:"-"` // never send password to client
 	Name     string `json:"name"`
+	Phone    string `json:"phone,omitempty"`
 }
 
 // Product represents a pizza product
@@ -53,11 +54,8 @@ var (
 var store *session.Store
 
 func init() {
-	var err error
-	store, err = session.New()
-	if err != nil {
-		log.Fatalf("Failed to create session store: %v", err)
-	}
+	// session.New returns *session.Store
+	store = session.New()
 }
 
 // openBrowser attempts to open URL in default browser
@@ -80,6 +78,7 @@ func registerHandler(c *fiber.Ctx) error {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 		Name     string `json:"name"`
+		Phone    string `json:"phone"`
 	}
 
 	var req RegisterRequest
@@ -121,6 +120,7 @@ func registerHandler(c *fiber.Ctx) error {
 		Email:    req.Email,
 		Password: string(hashedPassword),
 		Name:     req.Name,
+		Phone:    req.Phone,
 	}
 
 	mu.Lock()
@@ -135,6 +135,7 @@ func registerHandler(c *fiber.Ctx) error {
 	sess.Set("user_id", user.ID)
 	sess.Set("user_email", user.Email)
 	sess.Set("user_name", user.Name)
+	sess.Set("user_phone", user.Phone)
 	if err := sess.Save(); err != nil {
 		return err
 	}
@@ -145,6 +146,7 @@ func registerHandler(c *fiber.Ctx) error {
 			"id":    user.ID,
 			"email": user.Email,
 			"name":  user.Name,
+			"phone": user.Phone,
 		},
 	})
 }
@@ -196,6 +198,7 @@ func loginHandler(c *fiber.Ctx) error {
 	sess.Set("user_id", user.ID)
 	sess.Set("user_email", user.Email)
 	sess.Set("user_name", user.Name)
+	sess.Set("user_phone", user.Phone)
 	if err := sess.Save(); err != nil {
 		return err
 	}
@@ -206,6 +209,7 @@ func loginHandler(c *fiber.Ctx) error {
 			"id":    user.ID,
 			"email": user.Email,
 			"name":  user.Name,
+			"phone": user.Phone,
 		},
 	})
 }
@@ -243,6 +247,7 @@ func meHandler(c *fiber.Ctx) error {
 			"id":    userID,
 			"email": sess.Get("user_email"),
 			"name":  sess.Get("user_name"),
+			"phone": sess.Get("user_phone"),
 		},
 	})
 }
@@ -280,7 +285,7 @@ func main() {
 	// Middleware
 	app.Use(logger.New())
 	app.Use(cors.New())
-	app.Use(session.New())
+	// Session store is initialized in init() and used inside handlers via store.Get(c)
 
 	// Serve static files
 	app.Static("/static", "./static")
@@ -295,6 +300,22 @@ func main() {
 	// Page Routes
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendFile("templates/index.html")
+	})
+
+	app.Get("/login", func(c *fiber.Ctx) error {
+		return c.SendFile("templates/login.html")
+	})
+
+	app.Get("/register", func(c *fiber.Ctx) error {
+		return c.SendFile("templates/register.html")
+	})
+
+	// Fragments for modal load on the main page
+	app.Get("/auth/login_fragment", func(c *fiber.Ctx) error {
+		return c.SendFile("templates/auth_login_fragment.html")
+	})
+	app.Get("/auth/register_fragment", func(c *fiber.Ctx) error {
+		return c.SendFile("templates/auth_register_fragment.html")
 	})
 
 	app.Get("/product/:id", func(c *fiber.Ctx) error {

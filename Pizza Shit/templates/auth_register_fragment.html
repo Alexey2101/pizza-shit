@@ -1,0 +1,27 @@
+<!-- Register fragment (used inside modal) -->
+<div id="registerFragment">
+    <div id="registerTab" class="auth-tab active" style="display:block;">
+        <h2>Создать аккаунт</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="registerName">Имя</label>
+                <input type="text" id="registerName" name="name" required placeholder="Ваше имя">
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Телефон</label>
+                <input type="tel" id="registerPhone" name="phone" placeholder="+7 (777) 123-45-67">
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" name="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Пароль</label>
+                <input type="password" id="registerPassword" name="password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="auth-submit-btn">Зарегистрироваться</button>
+            <p class="auth-switch">Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a></p>
+        </form>
+        <div id="registerError" class="auth-error" style="display:none;"></div>
+    </div>
+</div>

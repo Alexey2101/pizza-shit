@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — ДОДО ПИЦЦА</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="main-header">
+            <div class="header-content">
+                <a href="/" class="logo-link"><img src="/static/Images/Logo.png" class="site-logo" alt="logo"></a>
+                <h1 style="margin-left:1rem; font-size:1.25rem;">Регистрация</h1>
+                <div style="margin-left:auto;"></div>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width:720px; margin:4.5rem auto 2rem; padding:1rem;">
+        <section class="auth-panel">
+            <h2 style="margin-bottom:1rem;">Создать аккаунт</h2>
+            <form id="registerFormPage">
+                <div class="form-group">
+                    <label for="registerNamePage">Имя</label>
+                    <input type="text" id="registerNamePage" name="name" required placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="registerPhonePage">Телефон</label>
+                    <input type="tel" id="registerPhonePage" name="phone" placeholder="+7 (777) 123-45-67">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmailPage">Email</label>
+                    <input type="email" id="registerEmailPage" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordPage">Пароль</label>
+                    <input type="password" id="registerPasswordPage" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="auth-submit-btn">Зарегистрироваться</button>
+            </form>
+            <p style="margin-top:1rem;">Уже есть аккаунт? <a href="/login">Войти</a></p>
+            <div id="registerErrorPage" class="auth-error" style="display:none;margin-top:1rem;"></div>
+        </section>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+    <script>
+    (function() {
+        const pageForm = document.getElementById('registerFormPage');
+        if (!pageForm) return;
+        pageForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerNamePage').value;
+            const phone = document.getElementById('registerPhonePage').value;
+            const email = document.getElementById('registerEmailPage').value;
+            const password = document.getElementById('registerPasswordPage').value;
+            const errorDiv = document.getElementById('registerErrorPage');
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, password })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    errorDiv.style.display = 'none';
+                    window.location.href = '/';
+                } else {
+                    errorDiv.textContent = data.error || 'Ошибка регистрации';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Ошибка сети: ' + err.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

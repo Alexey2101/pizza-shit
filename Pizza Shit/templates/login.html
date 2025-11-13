@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — ДОДО ПИЦЦА</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="main-header">
+            <div class="header-content">
+                <a href="/" class="logo-link"><img src="/static/Images/Logo.png" class="site-logo" alt="logo"></a>
+                <h1 style="margin-left:1rem; font-size:1.25rem;">Вход</h1>
+                <div style="margin-left:auto;"></div>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width:720px; margin:4.5rem auto 2rem; padding:1rem;">
+        <section class="auth-panel">
+            <h2 style="margin-bottom:1rem;">Вход в аккаунт</h2>
+            <form id="loginFormPage">
+                <div class="form-group">
+                    <label for="loginEmailPage">Email</label>
+                    <input type="email" id="loginEmailPage" name="email" required placeholder="you@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPasswordPage">Пароль</label>
+                    <input type="password" id="loginPasswordPage" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="auth-submit-btn">Войти</button>
+            </form>
+            <p style="margin-top:1rem;">Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+            <div id="loginErrorPage" class="auth-error" style="display:none;margin-top:1rem;"></div>
+        </section>
+    </main>
+
+    <script src="/static/js/script.js"></script>
+    <script>
+    // Wire page-specific form ids into the existing handlers by delegating values
+    (function() {
+        const pageLoginForm = document.getElementById('loginFormPage');
+        if (!pageLoginForm) return;
+        pageLoginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmailPage').value;
+            const password = document.getElementById('loginPasswordPage').value;
+            const errorDiv = document.getElementById('loginErrorPage');
+            // reuse same handler logic as modal: call /api/login
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    errorDiv.style.display = 'none';
+                    // redirect home after login
+                    window.location.href = '/';
+                } else {
+                    errorDiv.textContent = data.error || 'Ошибка входа';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Ошибка сети: ' + err.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

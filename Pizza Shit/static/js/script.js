@@ -1,20 +1,20 @@
 // Product Data (local fallback)
 const popularProducts = [
-    { id: "1", image: "/static/images/pizza/Arriva.png", title: "Аррива!", description: "Пепперони, острый перец, лук, томат", price: "от 1 800 ₸", badge: "Хит" },
-    { id: "2", image: "/static/images/pizza/Cheesy.png", title: "Сырная", description: "Четыре вида сыра, томат, орегано", price: "от 1 500 ₸", badge: "Хит" },
-    { id: "3", image: "/static/images/pizza/Chicken Teriyaki.png", title: "Терияки", description: "Курица, соус терияки, ананас, лук", price: "от 2 100 ₸", badge: null },
-    { id: "4", image: "/static/images/pizza/Shrimps with pesto.png", title: "Креветки со сладким чили", description: "Креветки, перец, лук, сладкий соус чили", price: "от 2 600 ₸", badge: "Новинка" }
+    { id: "1", image: "/static/Images/pizza/Arriva.png", title: "Аррива!", description: "Пепперони, острый перец, лук, томат", price: "от 1 800 ₸", badge: "Хит" },
+    { id: "2", image: "/static/Images/pizza/Cheesy.png", title: "Сырная", description: "Четыре вида сыра, томат, орегано", price: "от 1 500 ₸", badge: "Хит" },
+    { id: "3", image: "/static/Images/pizza/Chicken Teriyaki.png", title: "Терияки", description: "Курица, соус терияки, ананас, лук", price: "от 2 100 ₸", badge: null },
+    { id: "4", image: "/static/Images/pizza/Shrimps with pesto.png", title: "Креветки со сладким чили", description: "Креветки, перец, лук, сладкий соус чили", price: "от 2 600 ₸", badge: "Новинка" }
 ];
 
 const pizzas = [
-    { id: "p1", image: "/static/images/pizza/Pesto Pizza.png", title: "Маргарита", description: "Томат, сыр моцарелла, базилик", price: "от 1 300 ₸", badge: null },
-    { id: "p2", image: "/static/images/pizza/Ham & Cheese.png", title: "Пепперони", description: "Пепперони, сыр, томат, орегано", price: "от 1 600 ₸", badge: "Хит" },
-    { id: "p3", image: "/static/images/pizza/Chorizo fresh.png", title: "Чоризо фреш", description: "Чоризо, перец, томат, сыр", price: "от 1 900 ₸", badge: "Новинка" },
-    { id: "p4", image: "/static/images/pizza/Double Chicken.png", title: "Мясное наслаждение", description: "Говядина, пепперони, колбаса, бекон", price: "от 2 200 ₸", badge: null },
-    { id: "p5", image: "/static/images/pizza/Dodo mix.png", title: "Четыре сезона", description: "Помидоры, грибы, артишоки, оливки", price: "от 1 800 ₸", badge: null },
-    { id: "p6", image: "/static/images/pizza/Chill Grill.png", title: "Дьявольская", description: "Острая пепперони, перец халапеньо, острый соус", price: "от 1 900 ₸", badge: "Выгодно" },
-    { id: "p7", image: "/static/images/pizza/Cheesy.png", title: "Вегетарианская", description: "Помидоры, перец, грибы, лук, оливки", price: "от 1 400 ₸", badge: null },
-    { id: "p8", image: "/static/images/pizza/Pizza Halves.png", title: "Гавайская", description: "Ветчина, ананас, сыр, томат", price: "от 1 700 ₸", badge: null }
+    { id: "p1", image: "/static/Images/pizza/Pesto Pizza.png", title: "Маргарита", description: "Томат, сыр моцарелла, базилик", price: "от 1 300 ₸", badge: null },
+    { id: "p2", image: "/static/Images/pizza/Ham & Cheese.png", title: "Пепперони", description: "Пепперони, сыр, томат, орегано", price: "от 1 600 ₸", badge: "Хит" },
+    { id: "p3", image: "/static/Images/pizza/Chorizo fresh.png", title: "Чоризо фреш", description: "Чоризо, перец, томат, сыр", price: "от 1 900 ₸", badge: "Новинка" },
+    { id: "p4", image: "/static/Images/pizza/Double Chicken.png", title: "Мясное наслаждение", description: "Говядина, пепперони, колбаса, бекон", price: "от 2 200 ₸", badge: null },
+    { id: "p5", image: "/static/Images/pizza/Dodo mix.png", title: "Четыре сезона", description: "Помидоры, грибы, артишоки, оливки", price: "от 1 800 ₸", badge: null },
+    { id: "p6", image: "/static/Images/pizza/Chill Grill.png", title: "Дьявольская", description: "Острая пепперони, перец халапеньо, острый соус", price: "от 1 900 ₸", badge: "Выгодно" },
+    { id: "p7", image: "/static/Images/pizza/Cheesy.png", title: "Вегетарианская", description: "Помидоры, перец, грибы, лук, оливки", price: "от 1 400 ₸", badge: null },
+    { id: "p8", image: "/static/Images/pizza/Pizza Halves.png", title: "Гавайская", description: "Ветчина, ананас, сыр, томат", price: "от 1 700 ₸", badge: null }
 ];
 
 const combos = [
@@ -409,124 +409,241 @@ const switchToLogin = document.getElementById('switchToLogin');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 
-// Toggle auth modal
-authBtn.addEventListener('click', () => {
-    authModal.classList.add('show');
-});
+// Toggle auth modal (use onclick to make it replaceable by updateAuthUI)
+function openAuthModal() {
+    if (!authModal) return;
+    authModal.style.display = 'flex';
+    // allow CSS transition
+    requestAnimationFrame(() => authModal.classList.add('show'));
+    document.body.classList.add('lock');
+}
 
-authModalClose.addEventListener('click', () => {
+function closeAuthModal() {
+    if (!authModal) return;
     authModal.classList.remove('show');
-});
+    document.body.classList.remove('lock');
+    setTimeout(() => { if (authModal) authModal.style.display = 'none'; }, 260);
+}
 
-// Switch between login and register tabs
-switchToRegister.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginTab.classList.remove('active');
-    registerTab.classList.add('active');
-});
+if (authBtn) authBtn.onclick = openAuthModal;
+if (authModalClose) authModalClose.addEventListener('click', () => closeAuthModal());
+// overlay close
+const authModalOverlay = document.getElementById('authModalOverlay');
+if (authModalOverlay) authModalOverlay.addEventListener('click', () => closeAuthModal());
 
-switchToLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    registerTab.classList.remove('active');
-    loginTab.classList.add('active');
-});
+// Helper to attach tab switchers inside injected fragments
+function attachFragmentTabSwitchers() {
+    const sToRegister = document.getElementById('switchToRegister');
+    const sToLogin = document.getElementById('switchToLogin');
+    if (sToRegister) sToRegister.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await loadAuthFragment('register');
+    });
+    if (sToLogin) sToLogin.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await loadAuthFragment('login');
+    });
+}
 
-// Handle login form submission
-loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    const errorDiv = document.getElementById('loginError');
-    
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            errorDiv.style.display = 'none';
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-            updateAuthUI(data.user);
-            authModal.classList.remove('show');
-            loginForm.reset();
-        } else {
-            errorDiv.textContent = data.error || 'Ошибка входа';
-            errorDiv.style.display = 'block';
+// Helper: show inline messages in auth modal
+function showAuthMessage(el, message, type = 'error') {
+    if (!el) return;
+    el.textContent = message || '';
+    el.className = 'auth-feedback ' + (type === 'success' ? 'auth-success' : (type === 'loading' ? 'auth-loading' : 'auth-error'));
+    el.style.display = message ? 'block' : 'none';
+}
+
+function setButtonLoading(btn, loading = true) {
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.dataset.loading = loading ? '1' : '0';
+}
+
+// Attach login form submit handler for a given form element
+function attachLoginListeners(formEl) {
+    if (!formEl) return;
+    formEl.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const errorDiv = document.getElementById('loginError');
+        const submitBtn = formEl.querySelector('button[type="submit"]');
+
+        // Basic validation
+        if (!email || !password) {
+            showAuthMessage(errorDiv, 'Пожалуйста, заполните все поля', 'error');
+            return;
         }
-    } catch (error) {
-        errorDiv.textContent = 'Ошибка сети: ' + error.message;
-        errorDiv.style.display = 'block';
-    }
-});
-
-// Handle register form submission
-registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = document.getElementById('registerName').value;
-    const email = document.getElementById('registerEmail').value;
-    const password = document.getElementById('registerPassword').value;
-    const errorDiv = document.getElementById('registerError');
-    
-    try {
-        const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
-        });
+        showAuthMessage(errorDiv, 'Отправка...', 'loading');
+        setButtonLoading(submitBtn, true);
         
-        const data = await response.json();
-        
-        if (response.ok) {
-            errorDiv.style.display = 'none';
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-            updateAuthUI(data.user);
-            authModal.classList.remove('show');
-            registerForm.reset();
-        } else {
-            errorDiv.textContent = data.error || 'Ошибка регистрации';
-            errorDiv.style.display = 'block';
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showAuthMessage(errorDiv, 'Успешный вход', 'success');
+                updateAuthUI(data.user);
+                closeAuthModal();
+                formEl.reset();
+                setTimeout(() => showAuthMessage(errorDiv, '', ''), 1200);
+                // refresh to reflect session-protected content
+                setTimeout(() => location.reload(), 300);
+            } else {
+                showAuthMessage(errorDiv, data.error || 'Ошибка входа', 'error');
+            }
+        } catch (error) {
+            showAuthMessage(errorDiv, 'Ошибка сети: ' + error.message, 'error');
         }
-    } catch (error) {
-        errorDiv.textContent = 'Ошибка сети: ' + error.message;
-        errorDiv.style.display = 'block';
-    }
-});
+        setButtonLoading(submitBtn, false);
+    });
+}
+
+// Attach register form submit handler for a given form element
+function attachRegisterListeners(formEl) {
+    if (!formEl) return;
+    formEl.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('registerName').value;
+        const phone = document.getElementById('registerPhone') ? document.getElementById('registerPhone').value.trim() : '';
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const errorDiv = document.getElementById('registerError');
+        const submitBtn = formEl.querySelector('button[type="submit"]');
+
+        // Basic validation
+        if (!name || !email || !password) {
+            showAuthMessage(errorDiv, 'Пожалуйста, заполните все поля', 'error');
+            return;
+        }
+        // Optional: basic phone validation (allow empty)
+        if (phone && !/^\+?\d[\d\s\-()]{5,}$/.test(phone)) {
+            showAuthMessage(errorDiv, 'Введите корректный номер телефона', 'error');
+            return;
+        }
+        showAuthMessage(errorDiv, 'Отправка...', 'loading');
+        setButtonLoading(submitBtn, true);
+        
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showAuthMessage(errorDiv, 'Регистрация успешна', 'success');
+                updateAuthUI(data.user);
+                closeAuthModal();
+                formEl.reset();
+                setTimeout(() => showAuthMessage(errorDiv, '', ''), 1200);
+                setTimeout(() => location.reload(), 300);
+            } else {
+                showAuthMessage(errorDiv, data.error || 'Ошибка регистрации', 'error');
+            }
+        } catch (error) {
+            showAuthMessage(errorDiv, 'Ошибка сети: ' + error.message, 'error');
+        }
+        setButtonLoading(submitBtn, false);
+    });
+}
 
 // Update auth UI based on user state
 function updateAuthUI(user) {
+    if (!authBtn) return;
+    // remove previous onclick to avoid duplicate handlers
+    authBtn.onclick = null;
     if (user) {
         authBtn.innerHTML = `<i class="fas fa-user-check"></i><span class="auth-text">${user.name}</span>`;
-        authBtn.addEventListener('click', logoutUser);
+        // clicking will log out
+        authBtn.onclick = logoutUser;
+        // small ARIA hint
+        authBtn.title = 'Выйти';
     } else {
         authBtn.innerHTML = `<i class="fas fa-user"></i><span class="auth-text">Войти</span>`;
-        authBtn.addEventListener('click', () => authModal.classList.add('show'));
+        // open modal with login fragment when not authenticated
+        authBtn.onclick = async () => {
+            try {
+                await loadAuthFragment('login');
+                openAuthModal();
+            } catch (e) {
+                // fallback to standalone page
+                window.location.href = '/login';
+            }
+        };
+        authBtn.title = 'Войти';
     }
+}
+
+// Load auth fragment (login/register), inject into modal content and attach handlers
+async function loadAuthFragment(name) {
+    if (!authModal) return;
+    const contentEl = document.getElementById('authModalContent');
+    if (!contentEl) return;
+    const url = name === 'register' ? '/auth/register_fragment' : '/auth/login_fragment';
+    const res = await fetch(url, { method: 'GET' });
+    if (!res.ok) throw new Error('Не удалось загрузить форму');
+    const html = await res.text();
+    contentEl.innerHTML = html;
+
+    // Attach close button inside content (if any)
+    const innerClose = document.getElementById('authModalClose');
+    if (innerClose) innerClose.addEventListener('click', () => closeAuthModal());
+
+    // Attach tab switchers inside fragment
+    attachFragmentTabSwitchers();
+
+    // Attach form listeners if present
+    const lf = document.getElementById('loginForm');
+    const rf = document.getElementById('registerForm');
+    if (lf) attachLoginListeners(lf);
+    if (rf) attachRegisterListeners(rf);
+
+    // Optionally focus first input
+    const firstInput = contentEl.querySelector('input');
+    if (firstInput) firstInput.focus();
 }
 
 // Logout function
 async function logoutUser() {
     try {
         await fetch('/api/logout', { method: 'GET' });
-        localStorage.removeItem('currentUser');
         updateAuthUI(null);
+        // reload to refresh session-dependent data
         location.reload();
     } catch (error) {
         console.error('Logout error:', error);
     }
 }
 
-// Check if user is already logged in
-window.addEventListener('load', () => {
+// Check auth state on page load by asking server
+async function checkAuth() {
     try {
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if (user) {
-            updateAuthUI(user);
+        const res = await fetch('/api/me');
+        if (res.ok) {
+            const data = await res.json();
+            if (data && data.user) {
+                updateAuthUI(data.user);
+                return;
+            }
         }
     } catch (e) {
-        console.log('No user stored');
+        // ignore network errors for auth check
     }
-});
+    updateAuthUI(null);
+}
+
+// Call checkAuth after init() to ensure UI reflects server session
+// If login/register forms exist on standalone pages, attach handlers
+if (loginForm) attachLoginListeners(loginForm);
+if (registerForm) attachRegisterListeners(registerForm);
+
+// Initialize products then check auth
+init().then(() => checkAuth()).catch(() => checkAuth());

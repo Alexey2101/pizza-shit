@@ -889,3 +889,15 @@ footer {
         display: none;
     }
 }
+
+/* Auth feedback messages inside the modal */
+.auth-feedback {
+    display: none;
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+}
+.auth-loading { color: var(--dodo-gray); opacity: 0.9; }
+.auth-success { color: #0b8a3e; font-weight: 600; }
+.auth-error { color: #c23b3b; }
+
+.auth-feedback.auth-loading::before { content: '…'; margin-right: 0.4rem; }
