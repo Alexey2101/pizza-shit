@@ -51,14 +51,14 @@ body {
     z-index: 1102;
     background: white;
     border-radius: 1rem;
-    max-width: 1000px;
+    max-width: 1200px;
     width: 95%;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 300px 1fr;
+    gap: 1.5rem;
     padding: 2rem;
     transform-origin: center center;
 }
@@ -67,6 +67,7 @@ body {
         grid-template-columns: 1fr;
         gap: 1rem;
         padding: 1.5rem;
+        max-width: 95vw;
     }
 }
 
@@ -118,65 +119,75 @@ body.lock {
 /* Left side - Image */
 .modal-image-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    flex-shrink: 0;
 }
 .modal-image {
     text-align: center;
     position: sticky;
-    top: 2rem;
+    top: 8rem;
+    width: 100%;
 }
 .modal-image img {
-    width: 100%;
-    max-width: 350px;
+    width: 150%;
+    max-width: 380px;
     height: auto;
     border-radius: 1rem;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
 }
 /* Right side - Info */
 .modal-info {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+}
+
+.modal-info-scroll {
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 0.5rem;
 }
 .modal-info h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--dodo-gray);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 .modal-info > p {
     color: rgba(77, 77, 77, 0.7);
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
 }
 .selector-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
 }
 .selector-group h3 {
     font-weight: 600;
     color: var(--dodo-gray);
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 .size-options, .crust-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 .size-btn, .radio-option {
     display: flex;
     align-items: center;
 }
 .size-btn {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     border: 2px solid var(--dodo-light-gray);
     background: white;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.3s;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 .size-btn.active {
@@ -189,13 +200,14 @@ body.lock {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     border: 2px solid var(--dodo-light-gray);
     border-radius: 0.5rem;
     transition: all 0.3s;
     background: white;
     flex: 1;
-    min-width: 150px;
+    min-width: 120px;
+    font-size: 0.85rem;
 }
 .radio-option input[type="radio"] {
     margin: 0;
@@ -203,7 +215,7 @@ body.lock {
 }
 .radio-option input[type="radio"]:checked + span {
     color: var(--dodo-orange);
-    font-weight: 600;
+    font-weight: 00;
 }
 .radio-option:has(input:checked) {
     border-color: var(--dodo-orange);
@@ -211,19 +223,27 @@ body.lock {
 }
 .addons-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-height: 300px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0rem;
+    max-height: 250px;
     overflow-y: auto;
-    padding-right: 0.5rem;
+    padding-right: 3rem;
+    margin-bottom: 0rem;
+}
+@media (max-width: 900px) {
+    .addons-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 320px;
+    }
 }
 @media (max-width: 600px) {
     .addons-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        max-height: 300px;
     }
 }
 .addon-btn {
-    padding: 1rem;
+    padding: 0.6rem;
     border: 2px solid var(--dodo-light-gray);
     background: white;
     border-radius: 0.5rem;
@@ -231,7 +251,8 @@ body.lock {
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.3rem;
+    min-width: 0;
 }
 .addon-btn.selected {
     border-color: var(--dodo-orange);
@@ -239,43 +260,47 @@ body.lock {
 }
 .addon-image {
     width: 100%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 0.35rem;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 0.3rem;
     background: var(--dodo-light-gray);
+    padding: 0.3rem;
 }
 .addon-name {
     font-weight: 500;
     color: var(--dodo-gray);
-    font-size: 0.875rem;
-    text-align: left;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
 }
 .addon-price {
     color: var(--dodo-orange);
     font-weight: 600;
-    font-size: 0.875rem;
-    text-align: left;
+    font-size: 0.7rem;
+    text-align: center;
 }
 .modal-footer {
-    grid-column: 1 / -1;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--dodo-light-gray);
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--dodo-light-gray);
+    flex-shrink: 0;
 }
 .modal-add-to-cart-btn {
     flex: 1;
     background-color: var(--dodo-orange);
     color: white;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     border-radius: 0.5rem;
     border: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: opacity 0.3s;
+    white-space: nowrap;
 }
 .modal-add-to-cart-btn:hover {
     opacity: 0.9;
@@ -283,10 +308,11 @@ body.lock {
 .modal-quantity {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     border: 2px solid var(--dodo-light-gray);
     border-radius: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.4rem;
+    flex-shrink: 0;
 }
 .quantity-btn {
     background: none;
@@ -294,16 +320,18 @@ body.lock {
     cursor: pointer;
     color: var(--dodo-orange);
     font-weight: 600;
-    padding: 0 0.5rem;
-    font-size: 1.25rem;
+    padding: 0 0.3rem;
+    font-size: 1.1rem;
+    line-height: 1;
 }
 .quantity-btn:hover {
     opacity: 0.7;
 }
 .quantity-display {
-    width: 50px;
+    width: 40px;
     text-align: center;
     font-weight: 600;
+    font-size: 0.9rem;
 }
 /* Scrollbar styling */
 .addons-grid::-webkit-scrollbar {

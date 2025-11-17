@@ -1,4 +1,4 @@
-﻿package main
+package main
 
 import (
 	"fmt"
@@ -27,22 +27,7 @@ type User struct {
 	Phone    string `json:"phone,omitempty"`
 }
 
-// Product represents a pizza product
-type Product struct {
-	ID          string `json:"id"`
-	Image       string `json:"image"`
-	Title       string `json:"title"`
-	Description string `json:"description"`
-	Price       string `json:"price"`
-	Badge       string `json:"badge,omitempty"`
-}
 
-// ProductsResponse wraps all product categories
-type ProductsResponse struct {
-	Popular []Product `json:"popular"`
-	Pizzas  []Product `json:"pizzas"`
-	Combos  []Product `json:"combos"`
-}
 
 // In-memory user storage
 var (
@@ -254,27 +239,7 @@ func meHandler(c *fiber.Ctx) error {
 
 // productsHandler returns all products
 func productsHandler(c *fiber.Ctx) error {
-	response := ProductsResponse{
-		Popular: []Product{
-			{ID: "1", Image: "/static/Images/pizza/Arriva.png", Title: "Аррива!", Description: "Пепперони, острый перец, лук, томат", Price: "1800 ₸", Badge: "Хит"},
-			{ID: "2", Image: "/static/Images/pizza/Cheesy.png", Title: "Сырная", Description: "Четыре вида сыра, томат, орегано", Price: "1500 ₸", Badge: "Хит"},
-			{ID: "3", Image: "/static/Images/pizza/Chicken-Teriyaki.png", Title: "Терияки", Description: "Курица, соус терияки, ананас, лук", Price: "2100 ₸"},
-			{ID: "4", Image: "/static/Images/pizza/Shrimps-with-pesto.png", Title: "Креветки с чили", Description: "Креветки, перец, лук, чили", Price: "2600 ₸", Badge: "Новинка"},
-		},
-		Pizzas: []Product{
-			{ID: "p1", Image: "/static/Images/pizza/Pesto-Pizza.png", Title: "Маргарита", Description: "Томат, моцарелла, базилик", Price: "1300 ₸"},
-			{ID: "p2", Image: "/static/Images/pizza/Ham-and-Cheese.png", Title: "Пепперони", Description: "Пепперони, сыр, томат, орегано", Price: "1600 ₸", Badge: "Хит"},
-			{ID: "p3", Image: "/static/Images/pizza/Chorizo-fresh.png", Title: "Чоризо", Description: "Чоризо, перец, томат, сыр", Price: "1900 ₸", Badge: "Новинка"},
-			{ID: "p4", Image: "/static/Images/pizza/Double-Chicken.png", Title: "Мясная", Description: "Говядина, пепперони, бекон", Price: "2200 ₸"},
-		},
-		Combos: []Product{
-			{ID: "c1", Image: "/static/Images/pizza/Pizza-Halves.png", Title: "Комбо 3990", Description: "2 пиццы + напиток + закуска", Price: "3990 ₸", Badge: "Выгодно"},
-			{ID: "c2", Image: "/static/Images/pizza/Dodo-mix.png", Title: "3 Пиццы", Description: "На выбор + салат + соус", Price: "5990 ₸", Badge: "Выгодно"},
-			{ID: "c3", Image: "/static/Images/pizza/Pizza-Halves.png", Title: "Семейное", Description: "4 пиццы + 2 напитка + закуска", Price: "7990 ₸"},
-			{ID: "c4", Image: "/static/Images/pizza/Arriva.png", Title: "Обед", Description: "Пицца + напиток + десерт", Price: "2490 ₸"},
-		},
-	}
-
+	response := GetAllProducts()
 	c.Set("Content-Type", "application/json")
 	return c.JSON(response)
 }
@@ -345,4 +310,3 @@ func main() {
 
 	log.Println("Server gracefully stopped")
 }
-
