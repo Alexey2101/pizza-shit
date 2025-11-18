@@ -1,65 +1,3 @@
-// Product Data (local fallback)
-const popularProducts = [
-    { id: "1", image: "/static/images/pizza/Arriva.png", title: "Аррива!", description: "Пепперони, острый перец, лук, томат", price: "от 1 800 ₸", badge: "Хит" },
-    { id: "2", image: "/static/images/pizza/Cheesy.png", title: "Сырная", description: "Четыре вида сыра, томат, орегано", price: "от 1 500 ₸", badge: "Хит" },
-    { id: "3", image: "/static/images/pizza/Chicken-Teriyaki.png", title: "Терияки", description: "Курица, соус терияки, ананас, лук", price: "от 2 100 ₸", badge: null },
-    { id: "4", image: "/static/images/pizza/Shrimps-with-pesto.png", title: "Креветки со сладким чили", description: "Креветки, перец, лук, сладкий соус чили", price: "от 2 600 ₸", badge: "Новинка" }
-];
-
-const pizzas = [
-    { id: "p1", image: "/static/images/pizza/Pesto-Pizza.png", title: "Маргарита", description: "Томат, сыр моцарелла, базилик", price: "от 1 300 ₸", badge: null },
-    { id: "p2", image: "/static/images/pizza/Ham-and-Cheese.png", title: "Пепперони", description: "Пепперони, сыр, томат, орегано", price: "от 1 600 ₸", badge: "Хит" },
-    { id: "p3", image: "/static/images/pizza/Chorizo-fresh.png", title: "Чоризо фреш", description: "Чоризо, перец, томат, сыр", price: "от 1 900 ₸", badge: "Новинка" },
-    { id: "p4", image: "/static/images/pizza/Double-Chicken.png", title: "Мясное наслаждение", description: "Говядина, пепперони, колбаса, бекон", price: "от 2 200 ₸", badge: null },
-    { id: "p5", image: "/static/images/pizza/Dodo-mix.png", title: "Четыре сезона", description: "Помидоры, грибы, артишоки, оливки", price: "от 1 800 ₸", badge: null },
-    { id: "p6", image: "/static/images/pizza/Chill-Grill.png", title: "Дьявольская", description: "Острая пепперони, перец халапеньо, острый соус", price: "от 1 900 ₸", badge: "Выгодно" },
-    { id: "p7", image: "/static/images/pizza/Cheesy.png", title: "Вегетарианская", description: "Помидоры, перец, грибы, лук, оливки", price: "от 1 400 ₸", badge: null },
-    { id: "p8", image: "/static/images/pizza/Pizza-Halves.png", title: "Гавайская", description: "Ветчина, ананас, сыр, томат", price: "от 1 700 ₸", badge: null },
-    { id: "p9", image: "/static/images/pizza/Chicken-Teriyaki.png", title: "Терияки", description: "Курица, соус терияки, ананас, лук", price: "от 2 100 ₸", badge: null },
-    { id: "p10", image: "/static/images/pizza/Shrimps-with-pesto.png", title: "Креветки со сладким чили", description: "Креветки, перец, лук, сладкий соус чили", price: "от 2 600 ₸", badge: "Новинка" },
-    { id: "p11", image: "/static/images/pizza/Arriva.png", title: "Аррива!", description: "Пепперони, острый перец, лук, томат", price: "от 1 800 ₸", badge: "Хит" },
-    { id: "p12", image: "/static/images/pizza/Chicken-Ranch.png", title: "Чикен Ранч", description: "Курица, бекон, сыр, чеснок, соус ранч", price: "от 2 000 ₸", badge: null },
-    { id: "p13", image: "/static/images/pizza/Meat-Feast.png", title: "Мясное наслаждение", description: "Говядина, пепперони, колбаса, бекон", price: "от 2 300 ₸", badge: "Выгодно" },
-    { id: "p14", image: "/static/images/pizza/Four-Seasons.png", title: "Четыре сезона", description: "Помидоры, грибы, артишоки, оливки", price: "от 1 900 ₸", badge: null },
-    { id: "p15", image: "/static/images/pizza/Create-your-own-pizza.png", title: "Создай свою пиццу", description: "Выбери ингредиенты на свой вкус", price: "от 1 200 ₸", badge: "Популярно" },
-    { id: "p16", image: "/static/images/pizza/Burger-pizza.png", title: "Бургер Пицца", description: "Мясная булка с говядиной и специями", price: "от 2 100 ₸", badge: null },
-    { id: "p17", image: "/static/images/pizza/Cheesy-chicken.png", title: "Сырная Курица", description: "Курица, три вида сыра, помидоры", price: "от 2 000 ₸", badge: "Популярно" },
-    { id: "p18", image: "/static/images/pizza/Chicken-burger-pizza.png", title: "Куриный Бургер", description: "Куриная булка с беконом и сыром", price: "от 1 950 ₸", badge: null },
-    { id: "p19", image: "/static/images/pizza/Hawaiian.png", title: "Гавайская классическая", description: "Ветчина, ананас, моцарелла, томат", price: "от 1 750 ₸", badge: null },
-    { id: "p20", image: "/static/images/pizza/Julienne.png", title: "Жульен", description: "Картофель с беконом и сливочным соусом", price: "от 1 850 ₸", badge: "Новинка" },
-    { id: "p21", image: "/static/images/pizza/Sweet-Chilli-shrimp.png", title: "Сладкие Креветки с Чили", description: "Креветки, сладкий соус, перец, специи", price: "от 2 550 ₸", badge: null }
-];
-
-const combos = [
-    { id: "c1", image: "/static/images/combo/2-pizzas-and-drink.png", title: "Комбо 2 пиццы + напиток", description: "2 пиццы на выбор + напиток", price: "от 3 990 ₸", badge: "Выгодно" },
-    { id: "c2", image: "/static/images/combo/3-pizzas.png", title: "3 пиццы", description: "На выбор + салат + соус", price: "от 5 990 ₸", badge: "Выгодно" },
-    { id: "c3", image: "/static/images/combo/Salad-and-appetizer.png", title: "Салат и закуска", description: "Свежий салат + любая закуска", price: "от 1 990 ₸", badge: null },
-    { id: "c4", image: "/static/images/combo/4-snacks.png", title: "4 закуски", description: "На выбор из ассортимента", price: "от 2 990 ₸", badge: null },
-    { id: "c5", image: "/static/images/combo/Meal-from-3900.png", title: "Семейный комбо", description: "4 пиццы + 2 напитка + закуска", price: "от 7 990 ₸", badge: null },
-    { id: "c6", image: "/static/images/combo/Pepperobi-combo.png", title: "Пепперони комбо", description: "2 пепперони пиццы + напиток", price: "от 4 490 ₸", badge: "Хит" },
-    { id: "c7", image: "/static/images/combo/3-pizzas-35cm.png", title: "Большой комбо 3 пиццы 35см", description: "Максимум пиццы для компании", price: "от 8 990 ₸", badge: "Выгодно" },
-    { id: "c8", image: "/static/images/combo/2-pizzas.png", title: "Экспресс обед", description: "1 пицца + напиток + десерт", price: "от 2 490 ₸", badge: null }
-];
-
-const snacks = [
-    { id: "s1", image: "/static/images/snacks/Dodster.png", title: "Додстер классический", description: "Ароматная булка с говядиной и соусом", price: "от 1 290 ₸", badge: null },
-    { id: "s2", image: "/static/images/snacks/Dodster-Chill-Grill.png", title: "Додстер Чилл-Гриль", description: "Острая версия с перцем чили", price: "от 1 490 ₸", badge: "Острое" },
-    { id: "s3", image: "/static/images/snacks/Ham-Dodster.png", title: "Додстер с ветчиной", description: "Булка с ветчиной и сыром", price: "от 1 390 ₸", badge: null },
-    { id: "s4", image: "/static/images/snacks/Meat-Feast-Dodster.png", title: "Додстер мясное наслаждение", description: "Булка с колбасой и беконом", price: "от 1 590 ₸", badge: "Популярно" },
-    { id: "s5", image: "/static/images/snacks/Teriyaki-Dodster.png", title: "Додстер Терияки", description: "Булка с курицей в соусе терияки", price: "от 1 490 ₸", badge: null },
-    { id: "s6", image: "/static/images/snacks/Spicy-Dodster.png", title: "Додстер острый", description: "Жаркая закуска для любителей острого", price: "от 1 290 ₸", badge: "Острое" },
-    { id: "s7", image: "/static/images/snacks/Chicken-roll.png", title: "Куриный рулет", description: "Хрустящий рулет с курицей и сыром", price: "от 890 ₸", badge: null },
-    { id: "s8", image: "/static/images/snacks/Chicken-Ham-&-Cheese-Dandwich.png", title: "Сэндвич курица-ветчина-сыр", description: "Классический сэндвич с тремя вкусами", price: "от 1 190 ₸", badge: null },
-    { id: "s9", image: "/static/images/snacks/Chorizo-BBQ-Dandwich.png", title: "Сэндвич Чоризо BBQ", description: "Пикантный сэндвич с чоризо и соусом BBQ", price: "от 1 290 ₸", badge: null }
-];
-
-const milkshakes = [
-    { id: "m1", image: "/static/images/milkshakes/Classic-Milkshake.png", title: "Классический молочный коктейль", description: "Свежее молоко, мороженое, ваниль", price: "от 890 ₸", badge: null },
-    { id: "m2", image: "/static/images/milkshakes/Chocolate-milkshake.png", title: "Шоколадный коктейль", description: "Молоко, шоколадный соус, мороженое", price: "от 990 ₸", badge: "Популярно" },
-    { id: "m3", image: "/static/images/milkshakes/Oreo-Milkshake.png", title: "Орео коктейль", description: "Молоко, печенье Орео, мороженое", price: "от 1 090 ₸", badge: "Новинка" },
-    { id: "m4", image: "/static/images/milkshakes/Milkshake-Pistachio.png", title: "Фисташковый коктейль", description: "Молоко, фисташковый сок, мороженое", price: "от 1 190 ₸", badge: null }
-];
-
 // Carousel functionality
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
@@ -411,27 +349,23 @@ if (modalAddToCartBtn) modalAddToCartBtn.addEventListener('click', () => {
     }
 });
 
-// Try to load from Go API, otherwise use local data
 async function init() {
     try {
         const res = await fetch('/api/products');
         if (res.ok) {
             const data = await res.json();
             renderAll(
-                data.popular || popularProducts,
-                data.pizzas || pizzas,
-                data.combos || combos,
-                data.snacks || snacks,
-                data.milkshakes || milkshakes
+                data.popular || [],
+                data.pizzas || [],
+                data.combos || [],
+                data.snacks || [],
+                data.milkshakes || []
             );
             return;
         }
     } catch (e) {
-        console.warn('API fetch failed, falling back to local data', e);
+        console.warn('API fetch failed, products will not be rendered', e);
     }
-
-    // Fallback
-    renderAll(popularProducts, pizzas, combos, snacks, milkshakes);
 
     // If URL contains ?id=... open modal on initial load (deep-link)
     try {
